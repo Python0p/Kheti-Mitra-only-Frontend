@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+        form {
+            max-width: 500px;
+            margin: 20px auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333333;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+            transform: scale(1.1);
+        }
+        #outputBox {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            display: none; /* Initially hide the output box */
+        }
+        #outputText {
+            font-size: 18px;
+            color: #333333;
+            text-align: center;
+        }
+        .research-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .research-button a {
+            text-decoration: none;
+        }
+        .research-button button {
+            background-color: #007bff;
+            color: white;
+            padding: 20px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .research-button button:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+<form id="userForm">
+    <h2>User Information Form</h2>
+    
+    <!-- Input fields for the values -->
+    <label for="nitrogen">Nitrogen (N) Level:</label>
+    <input type="text" id="nitrogen" name="nitrogen" placeholder="Enter Nitrogen level (in ppm)" required>
+    
+    <label for="phosphorus">Phosphorus (P) Level:</label>
+    <input type="text" id="phosphorus" name="phosphorus" placeholder="Enter Phosphorus level (in ppm)" required>
+    
+    <label for="potassium">Potassium (K) Level:</label>
+    <input type="text" id="potassium" name="potassium" placeholder="Enter Potassium level (in ppm)" required>
+    
+    <label for="temperature">Temperature (°C):</label>
+    <input type="text" id="temperature" name="temperature" placeholder="Enter Temperature (in °C)" required>
+    
+    <label for="humidity">Humidity (%):</label>
+    <input type="text" id="humidity" name="humidity" placeholder="Enter Humidity (in %)" required>
+    
+    <label for="ph">pH Level:</label>
+    <input type="text" id="ph" name="ph" placeholder="Enter pH level" step="0.1" required>
+    
+    <label for="rainfall">Rainfall (mm):</label>
+    <input type="text" id="rainfall" name="rainfall" placeholder="Enter Rainfall (in mm)" required>
+    
+    <!-- Submit button -->
+    <input type="submit" value="Submit">
+</form>
+
+<!-- Output message box -->
+<div id="outputBox">
+    <p id="outputText"></p>
+</div>
+
+<!-- Button linking to research page -->
+<div class="research-button">
+    <a href="https://www.kaggle.com/code/deepakshandilyaa/kheti-mitra-aiml-model-final/notebook" target="_blank"><button>Research Page</button></a>
+</div>
+
+<script>
+document.getElementById("userForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent the default form submission
+    
+    var form = this;
+    var valuesArray = []; // Initialize an empty array to store values
+    
+    // Loop through each input field and push its numeric value to the valuesArray
+    for (var i = 1; i <= 7; i++) {
+        var fieldName = ['nitrogen', 'phosphorus', 'potassium', 'temperature', 'humidity', 'ph', 'rainfall'][i - 1];
+        var fieldValue = parseFloat(form.elements[fieldName].value);
+        valuesArray.push(fieldValue);
+    }
+    
+    // Make a POST request to the Flask server
+    fetch("https://kheti-mitra-only-server-peach.vercel.app/predict", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ "input": valuesArray })
+    })
+    .then(response => response.json()) // Parse the response as JSON
+    .then(data => {
+        // Handle the response data
+        console.log(data);
+        // Display the output in the styled message box
+        var outputBox = document.getElementById("outputBox");
+        var outputText = document.getElementById("outputText");
+        outputText.textContent = "You Should Grow : " + data.output;
+        outputBox.style.display = "block"; // Show the output box
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        // Handle errors here
+        alert("An error occurred. Please try again.");
+    });
+});
+</script>
+
+</body>
+</html>
