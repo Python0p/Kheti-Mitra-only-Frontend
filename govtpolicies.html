@@ -28,9 +28,11 @@
             color: var(--text-color);
             margin: 0;
             padding: 0;
+            transition: background-color 0.3s, color 0.3s;
         }
         .navbar {
             background-color: var(--primary-color);
+            transition: background-color 0.3s ease;
         }
         .policy-card {
             transition: all 0.3s ease-in-out;
@@ -62,6 +64,44 @@
         @keyframes changeAnimation {
             0% { opacity: 0; transform: translateY(-10px); }
             100% { opacity: 1; transform: translateY(0); }
+        }
+        /* Dark mode styles */
+        body.dark-mode {
+            --primary-color: #388E3C;
+            --secondary-color: #2E7D32;
+            --accent-color: #FFB300;
+            --text-color: #f1f1f1;
+            --bg-color: #121212;
+        }
+        .dark-mode .navbar {
+            background-color: #1F1F1F;
+        }
+        .dark-mode .policy-card {
+            background: linear-gradient(145deg, #3a3a3a, #2c2c2c);
+            color: var(--text-color);
+        }
+        .dark-mode .icon-container {
+            background-color: var(--primary-color);
+        }
+        .dark-mode footer {
+            background-color: #1F1F1F;
+            color: var(--text-color);
+        }
+        .dark-mode footer a {
+            color: var(--accent-color);
+        }
+        /* Dark mode toggle button */
+        .dark-mode-toggle {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .dark-mode-toggle:hover {
+            color: #FFD700;
+            text-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 15px #FFD700;
         }
     </style>
 </head>
@@ -97,6 +137,11 @@
                             <li><a class="dropdown-item language-btn" href="#" data-lang="pa">ਪੰਜਾਬੀ (Punjabi)</a></li>
                             <li><a class="dropdown-item language-btn" href="#" data-lang="bn">বাংলা (Bengali)</a></li>
                         </ul>
+                    </li>
+                    <li class="nav-item">
+                        <button class="dark-mode-toggle" id="darkModeToggle">
+                            <i class="fas fa-moon"></i>
+                        </button>
                     </li>
                 </ul>
             </div>
@@ -259,6 +304,31 @@
 
         // Initial content update
         updateContent(currentLang);
+
+        // Dark mode toggle functionality
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        const icon = darkModeToggle.querySelector('i');
+
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                localStorage.setItem('darkMode', null);
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
     </script>
 </body>
 </html>

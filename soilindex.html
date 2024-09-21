@@ -21,6 +21,7 @@
             --accent-color: #FFA000;
             --text-color: #333;
             --bg-color: #f1f8e9;
+            --card-bg-color: #ffffff;
         }
         body {
             font-family: 'Poppins', sans-serif;
@@ -28,9 +29,11 @@
             color: var(--text-color);
             margin: 0;
             padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         .navbar {
             background-color: var(--primary-color);
+            transition: background-color 0.3s ease;
         }
         .btn-primary {
             background-color: var(--primary-color);
@@ -46,7 +49,7 @@
             border: none;
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            background-color: var(--card-bg-color);
         }
         .icon-container {
             background-color: var(--primary-color);
@@ -65,6 +68,41 @@
         @keyframes fadeInOut {
             0% { opacity: 0; transform: translateY(-10px); }
             100% { opacity: 1; transform: translateY(0); }
+        }
+        /* Dark mode styles */
+        body.dark-mode {
+            --primary-color: #388E3C;
+            --secondary-color: #2E7D32;
+            --accent-color: #FFB300;
+            --text-color: #f1f1f1;
+            --bg-color: #121212;
+            --card-bg-color: #1F1F1F;
+        }
+        .dark-mode .navbar {
+            background-color: #1F1F1F;
+        }
+        .dark-mode .feature-card {
+            background-color: var(--card-bg-color);
+            color: var(--text-color);
+        }
+        .dark-mode footer {
+            background-color: #1F1F1F;
+            color: var(--text-color);
+        }
+        .dark-mode footer a {
+            color: var(--accent-color);
+        }
+        /* Dark mode toggle button */
+        .dark-mode-toggle {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .dark-mode-toggle:hover {
+            color: var(--accent-color);
         }
     </style>
 </head>
@@ -100,6 +138,11 @@
                             <li><a class="dropdown-item language-btn" href="#" data-lang="pa">ਪੰਜਾਬੀ (Punjabi)</a></li>
                             <li><a class="dropdown-item language-btn" href="#" data-lang="bn">বাংলা (Bengali)</a></li>
                         </ul>
+                    </li>
+                    <li class="nav-item">
+                        <button class="dark-mode-toggle" id="darkModeToggle">
+                            <i class="fas fa-moon"></i>
+                        </button>
                     </li>
                 </ul>
             </div>
@@ -192,10 +235,10 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-light text-center text-lg-start mt-5">
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <footer class="text-center text-lg-start mt-5">
+        <div class="text-center p-3">
             © 2023 <span data-translate="footer_text">Kheti Mitra - Empowering Farmers</span>
-            <a class="text-dark" href="#">khetimitra.com</a>
+            <a href="#">khetimitra.com</a>
         </div>
     </footer>
 
@@ -236,6 +279,7 @@
                 footer_text: "Kheti Mitra - Empowering Farmers"
             },
             hi: {
+                // Hindi translations
                 brand: "खेती मित्र",
                 dashboard: "डैशबोर्ड",
                 soil_health: "मृदा स्वास्थ्य",
@@ -264,6 +308,7 @@
                 footer_text: "खेती मित्र - किसानों को सशक्त बनाना"
             },
             pa: {
+                // Punjabi translations
                 brand: "ਖੇਤੀ ਮਿੱਤਰ",
                 dashboard: "ਡੈਸ਼ਬੋਰਡ",
                 soil_health: "ਮਿੱਟੀ ਦੀ ਸਿਹਤ",
@@ -292,6 +337,7 @@
                 footer_text: "ਖੇਤੀ ਮਿੱਤਰ - ਕਿਸਾਨਾਂ ਨੂੰ ਸ਼ਕਤੀਸ਼ਾਲੀ ਬਣਾਉਣਾ"
             },
             bn: {
+                // Bengali translations
                 brand: "খেতি মিত্র",
                 dashboard: "ড্যাশবোর্ড",
                 soil_health: "মাটির স্বাস্থ্য",
@@ -319,7 +365,6 @@
                 conclusion: "মৃত্তিকা স্বাস্থ্য কার্ড প্রকল্প মাটির স্বাস্থ্য সমস্যাগুলি মোকাবেলা করে টেকসই কৃষি প্রচার, কৃষকদের জন্য ইনপুট খরচ কমানো এবং সামগ্রিক কৃষি উৎপাদনশীলতা উন্নত করার ক্ষেত্রে গুরুত্বপূর্ণ ভূমিকা পালন করে। এটি ভারতীয় মাটির দীর্ঘমেয়াদী স্বাস্থ্য এবং উর্বরতা নিশ্চিত করার লক্ষ্যে নেওয়া প্রধান উদ্যোগগুলির মধ্যে একটি।",
                 footer_text: "খেতি মিত্র - কৃষকদের ক্ষমতায়ন"
             }
-            // Add translations for other languages (pa, bn) here
         };
 
         let currentLang = 'en';
@@ -343,6 +388,19 @@
 
         // Initial content update
         updateContent(currentLang);
+
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        });
     </script>
 </body>
 </html>
