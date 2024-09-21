@@ -2,278 +2,463 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>TGC-Dashboard</title>
-    <link rel="stylesheet" href="css/header.css" />
-    <!-- MDB icon -->
-    <link rel="icon" href="" type="image/x-icon" />
+    <title>Kheti Mitra - Farmer Dashboard</title>
     <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
-    />
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <!-- Material Design Bootstrap -->
-    <link rel="stylesheet" href="css/mdb.min.css" />
-    <!-- Your custom styles (optional) -->
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.css" rel="stylesheet" />
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- Custom styles -->
+    <style>
+      :root {
+        --primary-color: #4CAF50;
+        --secondary-color: #45a049;
+        --accent-color: #FFA000;
+        --text-color: #333;
+        --bg-color: #f1f8e9;
+      }
+      body {
+        font-family: 'Poppins', sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+      }
+      .navbar {
+        background-color: var(--primary-color);
+      }
+      .btn-primary {
+        background-color: var(--primary-color);
+      }
+      .btn-primary:hover {
+        background-color: var(--secondary-color);
+      }
+      .feature-card {
+        transition: all 0.3s ease-in-out;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      }
+      .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      }
+      .feature-icon {
+        font-size: 3rem;
+        color: var(--accent-color);
+      }
+      .weather-icon {
+        font-size: 4rem;
+        color: var(--accent-color);
+      }
+      .crop-calendar {
+        background-color: #fff;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      }
+      .animation-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+      .animation-content {
+        text-align: center;
+        color: white;
+      }
+      .language-btn {
+        transition: all 0.3s ease;
+      }
+      .language-btn:hover {
+        transform: scale(1.1);
+      }
+      .translate-fade {
+        transition: opacity 0.3s ease-in-out;
+      }
+      .translate-fade.fade-out {
+        opacity: 0;
+      }
+      .translate-fade.fade-in {
+        opacity: 1;
+      }
+    </style>
   </head>
   <body>
-    <!-- Start your project here-->
-    <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-dark primary-color" id="header">
-      <!-- Navbar brand -->
-      <a class="navbar-brand ml-sm-auto font-weight-bold" href="#">Kheti Mitra</a>
+    <!-- Animation Overlay -->
+    <div class="animation-overlay">
+      <div class="animation-content">
+        <i class="fas fa-seedling animate__animated animate__bounceIn" style="font-size: 100px;"></i>
+        <h2 class="mt-3 animate__animated animate__fadeInUp">Growing...</h2>
+      </div>
+    </div>
 
-      <!-- Collapse button -->
-      <button
-        class="navbar-toggler mr-sm-auto"
-        type="button"
-        data-toggle="collapse"
-        data-target="#basicExampleNav"
-        aria-controls="basicExampleNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <!-- Collapsible content -->
-      <div class="collapse navbar-collapse" id="basicExampleNav">
-        <!-- Links -->
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#"
-              >Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-          </li>
-
-          <!-- Dropdown -->
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              id="navbarDropdownMenuLink"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-              >Dropdown</a
-            >
-            <div
-              class="dropdown-menu dropdown-primary"
-              aria-labelledby="navbarDropdownMenuLink"
-            >
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-        </ul>
-        <!-- Links -->
-        <div class="text-white danger-color font-weight-bold">
-          &nbsp;Log-out&nbsp;
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="https://cdn-icons-png.flaticon.com/512/628/628283.png" height="30" alt="Kheti Mitra Logo" loading="lazy" />
+          Kheti Mitra
+        </a>
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#" data-translate="dashboard"><i class="fas fa-home"></i> Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-translate="profile"><i class="fas fa-user"></i> Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-translate="settings"><i class="fas fa-cog"></i> Settings</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html" data-translate="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-language"></i> <span data-translate="language">Language</span>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item language-btn" href="#" data-lang="en">English</a></li>
+                <li><a class="dropdown-item language-btn" href="#" data-lang="hi">हिंदी (Hindi)</a></li>
+                <li><a class="dropdown-item language-btn" href="#" data-lang="pa">ਪੰਜਾਬੀ (Punjabi)</a></li>
+                <li><a class="dropdown-item language-btn" href="#" data-lang="bn">বাংলা (Bengali)</a></li>
+              </ul>
+            </li>
+          </ul>
         </div>
       </div>
-      <!-- Collapsible content -->
     </nav>
-    <!--/.Navbar-->
-    <!-- top layer -->
-    <div class="container-fluid p-0">
-        <div class="row">
-            <div class="col-12 col-md-6">
-                <!-- user details -->
-          <!-- Card -->
-<div class="card" id="dashUser">
-    <!-- Image -->
-    <img src="img/logo.jpg" alt="Image Description">
-    <!-- Card content -->
-    <div class="card-body p-0 m-2">
-        <!-- Title -->
-        <h2 class="card-title m-0 m-md-2 d-inline">Team AI-Magination</h2>
-        <!-- Text -->
-        <p class="card-text p-0">
-            <p class="p-0 m-0 ml-md-2 d-flex flex-center flex-row"><h5 class="d-inline m-0 p-0 ml-md-2"><i class="fas fa-map-marker-alt"></i></h5><span class="ml-2">Punjab</span></p>
-        </p>
-    </div>
-</div>
 
-                <!-- user details -->
+    <!-- Main Content -->
+    <div class="container my-5">
+      <div class="row">
+        <div class="col-lg-4 mb-4" data-aos="fade-right">
+          <!-- User Profile Card -->
+          <div class="card feature-card">
+            <div class="card-body">
+              <img src="https://www.pikpng.com/pngl/m/29-292158_vector-illustration-of-smiling-man-with-turban-headwear.png" class="rounded-circle mb-3" width="100" alt="Farmer Avatar">
+              <h5 class="card-title"><span data-translate="welcome" class="translate-fade">Welcome</span>, Sardar Singh</h5>
+              <p class="card-text"><i class="fas fa-map-marker-alt"></i> Punjab, India</p>
+              <p class="card-text"><i class="fas fa-clock"></i> <span data-translate="lastLogin" class="translate-fade">Last Login</span>: Today, 10:30 AM</p>
             </div>
-  <div class="col-12 col-md-6">
-    <!-- user history -->
-    <div class="card" id="dashUserHistory">
-        <!-- Card content -->
-        <div class="card-body p-0 m-2">
-            <!-- Title -->
-            <h4 class="card-title m-0 p-0 m-md-2" style="font-size: 18px;"><a>History</a></h4>
-            <!-- Text -->
-            <p class="card-text p-0">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-10 offset-md-1 mt-md-1" id="historyCar">
-                            <!--Carousel Wrapper-->
-                            <div id="carousel-example-2" class="carousel slide" data-ride="carousel">
-                                <!--Slides-->
-                                <div class="carousel-inner" role="listbox">
-                                    <div class="carousel-item active">
-                                        <div class="view history">
-                                            <a href="#" class="expandable-link">
-                                                <h3 class="h3-responsive d-inline">Khetti kese kare</h3>
-                                                <h6 class="d-block d-md-inline ml-md-5"><i class="far fa-calendar-alt text-primary"></i><span class="ml-2">09-Sept-2023</span></h6>
-                                            </a>
-                                            <div class="expanded-content">
-                                                <p class="d-none d-md-block mt-3">*Title: A Beginner's Guide to Growing Delicious Tomatoes*
-
-*Introduction:*
-
-Tomatoes, the versatile and flavorful fruit (yes, it's a fruit!), are a staple in kitchens around the world. Growing your own tomatoes can be a rewarding experience, not to mention that homegrown tomatoes often taste much better than store-bought ones. Whether you're a gardening enthusiast or a complete beginner, this guide will walk you through the steps to successfully grow your own tomatoes.
-
-*Getting Started:*
-
-1. *Choose the Right Variety:*
-   Tomatoes come in various sizes, colors, and flavors. Determinate varieties are compact and suitable for containers or small gardens, while indeterminate varieties grow taller and produce fruit throughout the season. Cherry, beefsteak, and Roma tomatoes are some popular options.
-
-2. *Select a Suitable Location:*
-   Tomatoes thrive in full sun, so choose a spot in your garden that receives at least 6-8 hours of sunlight each day. Ensure good air circulation to prevent disease.
-
-*Preparing the Soil:*
-
-3. *Soil Preparation:*
-   Tomatoes prefer well-draining, loamy soil rich in organic matter. Prepare the soil by adding compost or aged manure to improve its fertility and water retention capacity.
-
-4. *Soil pH:*
-   Aim for a slightly acidic to neutral pH level of around 6.0-6.8. You can test your soil and adjust the pH accordingly.
-
-*Planting:*
-
-5. *Start from Seeds or Seedlings:*
-   You can either start tomatoes from seeds indoors or purchase young seedlings from a nursery. If starting from seeds, do so 6-8 weeks before the last frost date in your area.
-
-6. *Transplanting:*
-   When your seedlings have grown strong and reached a height of about 6-8 inches, transplant them into your prepared garden soil. Space indeterminate varieties about 2-3 feet apart and determinate varieties around 1-2 feet apart.
-
-*Caring for Your Tomato Plants:*
-
-7. *Watering:*
-   Tomatoes need consistent moisture, but avoid overwatering as it can lead to root diseases. Water at the base of the plant to keep the foliage dry.
-
-8. *Mulching:*
-   Apply mulch (straw, wood chips, or compost) around your tomato plants to retain soil moisture, regulate temperature, and reduce weed growth.
-
-9. *Support and Pruning:*
-   Indeterminate varieties benefit from staking or caging to support their growth. Prune the lower branches to improve air circulation and reduce the risk of disease.
-
-10. *Fertilizing:*
-    Tomatoes are heavy feeders. Fertilize with a balanced, slow-release fertilizer or organic compost when planting and then periodically throughout the growing season.
-
-*Dealing with Common Challenges:*
-
-11. *Pest and Disease Control:*
-    Keep an eye out for common tomato pests like aphids and hornworms. Use natural or chemical remedies as needed, and practice crop rotation to reduce disease risk.
-
-12. *Blossom-End Rot:*
-    This condition is caused by calcium deficiency. Ensure consistent watering and provide calcium supplements if necessary.
-
-*Harvesting and Enjoying:*
-
-13. *Harvesting:*
-    Harvest tomatoes when they reach their mature color and are slightly soft to the touch. Gently twist or cut them from the vine to avoid damaging the plant.
-
-14. *Storing and Using Tomatoes:*
-    Store ripe tomatoes at room temperature and use them within a few days. Unripe tomatoes can be ripened indoors in a paper bag. Tomatoes are perfect for salads, sandwiches, sauces, and can even be preserved as salsa or canned whole.
-
-*Conclusion:*
-
-Growing your own tomatoes can be a fulfilling and tasty endeavor. With the right care, you'll be rewarded with juicy, homegrown tomatoes that are bursting with flavor. Remember to experiment with different varieties to find your favorites, and enjoy the fruits of your labor in salads, sauces, and countless other dishes. Happy gardening!</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Add similar sections for other carousel items -->
-                                </div>
-                                <!--/.Slides-->
-                                <!--Controls-->
-                                <a class="btn btn-blue historyButton" href="#carousel-example-2" role="button" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="btn ml-2 ml-md-3 btn-blue historyButton" href="#carousel-example-2" role="button" data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                                <!--/.Controls-->
-                            </div>
-                                <!--/.Carousel Wrapper-->
-                              </div>
-                            </div>
-                          </div>
-                        </p>
-                        </div>
-                    </div>
-                    <!-- user history -->
-            </div>
+          </div>
         </div>
-    </div>
-<!-- top layer -->
-<div class="container-fluid p-0 dashButtonPanel fixed-bottom">
-  <div class="row">
-    <div class="col-md-4 col-sm-6 d-flex flex-column flex-center p-3 border dashButton" style="height:17vh ;">
-      <a href="govtpolicies.html">
-        <h5><i class="fas fa-gavel"></i></h5>
-        <p class="font-weight-bold text-center">Government Policies</p>
-      </a>
-    </div>
-    <div class="col-md-4 col-sm-6 d-flex flex-column flex-center p-3 border dashButton" style="height:17vh ;">
-      <a href="soilindex.html">
-        <h5><i class="fas fa-mountain"></i></h5>
-        <p class="font-weight-bold text-center">Soil Index</p>
-      </a>
-    </div>
-   <div class="col-md-4 col-sm-6 d-flex flex-column flex-center p-3 border dashButton" style="height:17vh ;">
-  <a href="input.html">
-    <h5><i class="fas fa-users"></i></h5>
-    <p class="font-weight-bold text-center">Crop Predictor</p>
-  </a>
-</div>
+        <div class="col-lg-8 mb-4" data-aos="fade-left">
+          <!-- Weather Widget -->
+          <div class="card feature-card">
+            <div class="card-body d-flex justify-content-between align-items-center">
+              <div>
+                <h5 class="card-title" data-translate="todayWeather" class="translate-fade">Today's Weather</h5>
+                <p class="card-text">Sunny, 25°C</p>
+                <p class="card-text">Humidity: 60% | Wind: 5 km/h</p>
+              </div>
+              <i class="fas fa-sun weather-icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <div class="col-md-4 col-sm-6 d-flex flex-column flex-center p-3 border dashButton" style="height:17vh ;">
-      <h5><i class="fas fa-calculator"></i></h5>
-      <p class="font-weight-bold text-center">Loan Schemes</p>
-    </div>
-    <div class="col-md-4 col-sm-6 d-flex flex-column flex-center p-3 border dashButton" style="height:17vh ;">
-      <h5><i class="fas fa-question-circle"></i></h5>
-      <p class="font-weight-bold text-center">Ask Query</p>
-    </div>
-    <div class="col-md-4 col-sm-6 d-flex flex-column flex-center p-3 border dashButton" style="height:17vh ;">
-      <h5><i class="fas fa-user-cog"></i></h5>
-      <p class="font-weight-bold text-center">Profile update</p>
-    </div>
-  </div>
-</div>
+      <div class="row mt-4">
+        <h2 class="text-center mb-4" data-translate="quickActions" class="translate-fade">Quick Actions</h2>
+        <div class="col-md-4 mb-4" data-aos="zoom-in">
+          <div class="card feature-card h-100">
+            <div class="card-body text-center">
+              <i class="fas fa-seedling feature-icon mb-3"></i>
+              <h5 class="card-title" data-translate="cropPredictor" class="translate-fade">Crop Predictor</h5>
+              <p class="card-text">Get AI-powered crop recommendations based on your soil and climate.</p>
+              <a href="input.html" class="btn btn-primary animate-btn" data-animation="seedling" data-translate="predictCrop" class="translate-fade">Predict Crop</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card feature-card h-100">
+            <div class="card-body text-center">
+              <i class="fas fa-tint feature-icon mb-3"></i>
+              <h5 class="card-title" data-translate="soilHealth" class="translate-fade">Soil Health</h5>
+              <p class="card-text">Check your soil health, pH levels, and get fertilizer recommendations.</p>
+              <a href="soilindex.html" class="btn btn-primary animate-btn" data-animation="tint" data-translate="analyzeSoil" class="translate-fade">Analyze Soil</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="200">
+          <div class="card feature-card h-100">
+            <div class="card-body text-center">
+              <i class="fas fa-hand-holding-usd feature-icon mb-3"></i>
+              <h5 class="card-title" data-translate="govtSchemes" class="translate-fade">Government Schemes</h5>
+              <p class="card-text">Explore latest agricultural policies and financial support schemes.</p>
+              <a href="govtpolicies.html" class="btn btn-primary animate-btn" data-animation="hand-holding-usd" data-translate="viewSchemes" class="translate-fade">View Schemes</a>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <!-- End your project here-->
+      <div class="row mt-4">
+        <div class="col-md-6 mb-4" data-aos="fade-up">
+          <div class="card feature-card h-100">
+            <div class="card-body text-center">
+              <i class="fas fa-tractor feature-icon mb-3"></i>
+              <h5 class="card-title" data-translate="equipmentRental" class="translate-fade">Equipment Rental</h5>
+              <p class="card-text">Rent farming equipment and machinery at affordable prices.</p>
+              <a href="#" class="btn btn-primary animate-btn" data-animation="tractor" data-translate="rentEquipment" class="translate-fade">Rent Equipment</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="card feature-card h-100">
+            <div class="card-body text-center">
+              <i class="fas fa-comments feature-icon mb-3"></i>
+              <h5 class="card-title" data-translate="askExpert" class="translate-fade">Ask an Expert</h5>
+              <p class="card-text">Get expert answers to your farming questions in your local language.</p>
+              <a href="#" class="btn btn-primary animate-btn" data-animation="comments" data-translate="askNow" class="translate-fade">Ask Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <!-- jQuery -->
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="js/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="js/mdb.min.js"></script>
-    <!-- Your custom scripts (optional) -->
-    <script type="text/javascript"></script>
+      <div class="row mt-4">
+        <div class="col-12" data-aos="fade-up">
+          <div class="crop-calendar">
+            <h3 class="text-center mb-4" data-translate="cropCalendar" class="translate-fade">Crop Calendar</h3>
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th data-translate="crop" class="translate-fade">Crop</th>
+                    <th data-translate="sowingTime" class="translate-fade">Sowing Time</th>
+                    <th data-translate="harvestingTime" class="translate-fade">Harvesting Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Wheat</td>
+                    <td>October - November</td>
+                    <td>March - April</td>
+                  </tr>
+                  <tr>
+                    <td>Rice</td>
+                    <td>June - July</td>
+                    <td>November - December</td>
+                  </tr>
+                  <tr>
+                    <td>Cotton</td>
+                    <td>April - May</td>
+                    <td>October - November</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center text-lg-start mt-5">
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2023 Kheti Mitra - Empowering Farmers
+        <a class="text-dark" href="#">khetimitra.com</a>
+      </div>
+    </footer>
+
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
+    <!-- AOS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+
+      // Add click event listeners to all animate buttons
+      document.querySelectorAll('.animate-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          const overlay = document.querySelector('.animation-overlay');
+          const icon = overlay.querySelector('i');
+          const text = overlay.querySelector('h2');
+
+          // Set icon and text based on the clicked button's data-animation attribute
+          const animation = this.getAttribute('data-animation');
+          icon.className = `fas fa-${animation} animate__animated animate__bounceIn`;
+          
+          switch(animation) {
+            case 'seedling':
+              text.textContent = 'Predicting Crop...';
+              break;
+            case 'tint':
+              text.textContent = 'Analyzing Soil...';
+              break;
+            case 'hand-holding-usd':
+              text.textContent = 'Checking Schemes...';
+              break;
+            case 'tractor':
+              text.textContent = 'Finding Equipment...';
+              break;
+            case 'comments':
+              text.textContent = 'Connecting to Expert...';
+              break;
+            default:
+              text.textContent = 'Processing...';
+          }
+
+          // Show the overlay
+          overlay.style.display = 'flex';
+
+          // Hide the overlay after 2 seconds
+          setTimeout(() => {
+            overlay.style.display = 'none';
+            // Navigate to the href after the animation
+            window.location.href = this.getAttribute('href');
+          }, 2000);
+        });
+      });
+
+      // Language translation functionality
+      const translations = {
+        en: {
+          dashboard: "Dashboard",
+          profile: "Profile",
+          settings: "Settings",
+          logout: "Logout",
+          language: "Language",
+          welcome: "Welcome",
+          lastLogin: "Last Login",
+          todayWeather: "Today's Weather",
+          quickActions: "Quick Actions",
+          cropPredictor: "Crop Predictor",
+          predictCrop: "Predict Crop",
+          soilHealth: "Soil Health",
+          analyzeSoil: "Analyze Soil",
+          govtSchemes: "Government Schemes",
+          viewSchemes: "View Schemes",
+          equipmentRental: "Equipment Rental",
+          rentEquipment: "Rent Equipment",
+          askExpert: "Ask an Expert",
+          askNow: "Ask Now",
+          cropCalendar: "Crop Calendar",
+          crop: "Crop",
+          sowingTime: "Sowing Time",
+          harvestingTime: "Harvesting Time"
+        },
+        hi: {
+          dashboard: "डैशबोर्ड",
+          profile: "प्रोफ़ाइल",
+          settings: "सेटिंग्स",
+          logout: "लॉग आउट",
+          language: "भाषा",
+          welcome: "स्वागत है",
+          lastLogin: "अंतिम लॉगिन",
+          todayWeather: "आज का मौसम",
+          quickActions: "त्वरित कार्रवाई",
+          cropPredictor: "फसल भविष्यवक्ता",
+          predictCrop: "फसल की भविष्यवाणी करें",
+          soilHealth: "मिट्टी का स्वास्थ्य",
+          analyzeSoil: "मिट्टी का विश्लेषण करें",
+          govtSchemes: "सरकारी योजनाएं",
+          viewSchemes: "योजनाएं देखें",
+          equipmentRental: "उपकरण किराया",
+          rentEquipment: "उपकरण किराए पर लें",
+          askExpert: "विशेषज्ञ से पूछें",
+          askNow: "अभी पूछें",
+          cropCalendar: "फसल कैलेंडर",
+          crop: "फसल",
+          sowingTime: "बुवाई का समय",
+          harvestingTime: "कटाई का समय"
+        },
+        pa: {
+          dashboard: "ਡੈਸ਼ਬੋਰਡ",
+          profile: "ਪ੍ਰੋਫਾਈਲ",
+          settings: "ਸੈਟਿੰਗਾਂ",
+          logout: "ਲੌਗ ਆਊਟ",
+          language: "ਭਾਸ਼ਾ",
+          welcome: "ਜੀ ਆਇਆਂ ਨੂੰ",
+          lastLogin: "ਆਖਰੀ ਲੌਗਇਨ",
+          todayWeather: "ਅੱਜ ਦਾ ਮੌਸਮ",
+          quickActions: "ਤੇਜ਼ ਕਾਰਵਾਈਆਂ",
+          cropPredictor: "ਫਸਲ ਭਵਿੱਖਬਾਣੀ",
+          predictCrop: "ਫਸਲ ਦੀ ਭਵਿੱਖਬਾਣੀ ਕਰੋ",
+          soilHealth: "ਮਿੱਟੀ ਦੀ ਸਿਹਤ",
+          analyzeSoil: "ਮਿੱਟੀ ਦਾ ਵਿਸ਼ਲੇਸ਼ਣ ਕਰੋ",
+          govtSchemes: "ਸਰਕਾਰੀ ਯੋਜਨਾਵਾਂ",
+          viewSchemes: "ਯੋਜਨਾਵਾਂ ਵੇਖੋ",
+          equipmentRental: "ਉਪਕਰਣ ਕਿਰਾਏ 'ਤੇ",
+          rentEquipment: "ਉਪਕਰਣ ਕਿਰਾਏ 'ਤੇ ਲਓ",
+          askExpert: "ਮਾਹਰ ਤੋਂ ਪੁੱਛੋ",
+          askNow: "ਹੁਣੇ ਪੁੱਛੋ",
+          cropCalendar: "ਫਸਲ ਕੈਲੰਡਰ",
+          crop: "ਫਸਲ",
+          sowingTime: "ਬੀਜਣ ਦਾ ਸਮਾਂ",
+          harvestingTime: "ਵਾਢੀ ਦਾ ਸਮਾਂ"
+        },
+        bn: {
+          dashboard: "ড্যাশবোর্ড",
+          profile: "প্রোফাইল",
+          settings: "সেটিংস",
+          logout: "লগ আউট",
+          language: "ভাষা",
+          welcome: "স্বাগতম",
+          lastLogin: "শেষ লগইন",
+          todayWeather: "আজকের আবহাওয়া",
+          quickActions: "দ্রুত কার্যক্রম",
+          cropPredictor: "ফসল ভবিষ্যদ্বাণীকারী",
+          predictCrop: "ফসল পূর্বাভাস করুন",
+          soilHealth: "মাটির স্বাস্থ্য",
+          analyzeSoil: "মাটি বিশ্লেষণ করুন",
+          govtSchemes: "সরকারি প্রকল্প",
+          viewSchemes: "প্রকল্প দেখুন",
+          equipmentRental: "যন্ত্রপাতি ভাড়া",
+          rentEquipment: "যন্ত্রপাতি ভাড়া নিন",
+          askExpert: "বিশেষজ্ঞের কাছে জিজ্ঞাসা করুন",
+          askNow: "এখনই জিজ্ঞাসা করুন",
+          cropCalendar: "ফসল ক্যালেন্ডার",
+          crop: "ফসল",
+          sowingTime: "বীজ বোনার সময়",
+          harvestingTime: "ফসল কাটার সময়"
+        }
+      };
+
+      let currentLang = 'en';
+
+      function updateContent(lang) {
+        document.querySelectorAll('[data-translate]').forEach(element => {
+          const key = element.getAttribute('data-translate');
+          if (translations[lang] && translations[lang][key]) {
+            element.classList.add('fade-out');
+            setTimeout(() => {
+              element.textContent = translations[lang][key];
+              element.classList.remove('fade-out');
+              element.classList.add('fade-in');
+              setTimeout(() => {
+                element.classList.remove('fade-in');
+              }, 300);
+            }, 300);
+          }
+        });
+      }
+
+      document.querySelectorAll('.language-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          currentLang = this.getAttribute('data-lang');
+          updateContent(currentLang);
+        });
+      });
+
+      // Initial content update
+      updateContent(currentLang);
+    </script>
   </body>
 </html>
-
-

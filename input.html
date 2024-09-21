@@ -3,167 +3,391 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Information Form</title>
+    <title>Kheti Mitra - Crop Predictor</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.css" rel="stylesheet" />
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <style>
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #45a049;
+            --accent-color: #FFA000;
+            --text-color: #333;
+            --bg-color: #f1f8e9;
+            --sp: 2.5s; /* change speed */
+        }
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
         }
-        form {
-            max-width: 500px;
-            margin: 20px auto;
-            background: #ffffff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        .navbar {
+            background-color: var(--primary-color);
         }
-        h2 {
-            text-align: center;
-            color: #333333;
-        }
-        label {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 5px;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 18px;
+        .btn-primary {
+            background-color: var(--primary-color);
             transition: all 0.3s ease;
         }
-        input[type="submit"]:hover {
-            background-color: #45a049;
-            transform: scale(1.1);
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .feature-card {
+            transition: all 0.3s ease-in-out;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
         }
         #outputBox {
             margin-top: 20px;
             padding: 20px;
-            border-radius: 5px;
-            background-color: #f0f0f0;
-            display: none; /* Initially hide the output box */
+            border-radius: 15px;
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: none;
+            transition: all 0.3s ease;
         }
         #outputText {
             font-size: 18px;
-            color: #333333;
+            color: var(--text-color);
             text-align: center;
         }
-        .research-button {
-            text-align: center;
-            margin-top: 20px;
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
         }
-        .research-button a {
-            text-decoration: none;
-        }
-        .research-button button {
-            background-color: #007bff;
-            color: white;
-            padding: 20px 30px;
-            border: none;
+        .form-control {
             border-radius: 10px;
-            font-size: 20px;
-            cursor: pointer;
+            border: 2px solid #e0e0e0;
             transition: all 0.3s ease;
         }
-        .research-button button:hover {
-            background-color: #0056b3;
-            transform: scale(1.1);
+        .form-control:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 0.2rem rgba(255, 160, 0, 0.25);
+        }
+        .card-title {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        .loader {
+          width: 100px;
+          aspect-ratio: 1;
+          background:
+            radial-gradient(farthest-side,#ffa516 90%,#0000) center/24px 24px,
+            radial-gradient(farthest-side,green   90%,#0000) bottom/18px 18px;
+          background-repeat: no-repeat;
+          animation: l17 1s infinite linear;
+          position: relative;
+        }
+        .loader::before {    
+          content:"";
+          position: absolute;
+          width: 12px;
+          aspect-ratio: 1;
+          inset: auto 0 24px;
+          margin: auto;
+          background: #ccc;
+          border-radius: 50%;
+          transform-origin: 50% calc(100% + 15px);
+          animation: inherit;
+          animation-duration: 0.5s;
+        }
+        @keyframes l17 { 
+          100%{transform: rotate(1turn)}
+        }
+        .translate {
+            transition: opacity 0.3s ease-in-out;
+        }
+        .translate.fade-out {
+            opacity: 0;
+        }
+        .translate.fade-in {
+            opacity: 1;
         }
     </style>
 </head>
 <body>
 
-<form id="userForm">
-    <h2>User Information Form</h2>
-    
-    <!-- Input fields for the values -->
-    <label for="nitrogen">Nitrogen (N) Level:</label>
-    <input type="text" id="nitrogen" name="nitrogen" placeholder="Enter Nitrogen level (in ppm)" required>
-    
-    <label for="phosphorus">Phosphorus (P) Level:</label>
-    <input type="text" id="phosphorus" name="phosphorus" placeholder="Enter Phosphorus level (in ppm)" required>
-    
-    <label for="potassium">Potassium (K) Level:</label>
-    <input type="text" id="potassium" name="potassium" placeholder="Enter Potassium level (in ppm)" required>
-    
-    <label for="temperature">Temperature (°C):</label>
-    <input type="text" id="temperature" name="temperature" placeholder="Enter Temperature (in °C)" required>
-    
-    <label for="humidity">Humidity (%):</label>
-    <input type="text" id="humidity" name="humidity" placeholder="Enter Humidity (in %)" required>
-    
-    <label for="ph">pH Level:</label>
-    <input type="text" id="ph" name="ph" placeholder="Enter pH level" step="0.1" required>
-    
-    <label for="rainfall">Rainfall (mm):</label>
-    <input type="text" id="rainfall" name="rainfall" placeholder="Enter Rainfall (in mm)" required>
-    
-    <!-- Submit button -->
-    <input type="submit" value="Submit">
-</form>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="https://cdn-icons-png.flaticon.com/512/628/628283.png" height="30" alt="Kheti Mitra Logo" loading="lazy" />
+            <span class="translate" data-key="brand">Kheti Mitra</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="dashboard.html"><i class="fas fa-home"></i> <span class="translate" data-key="dashboard">Dashboard</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#"><i class="fas fa-seedling"></i> <span class="translate" data-key="crop_predictor">Crop Predictor</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html"><i class="fas fa-sign-out-alt"></i> <span class="translate" data-key="logout">Logout</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-language"></i> Language
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#" onclick="updateLanguage('en')">English</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="updateLanguage('hi')">हिंदी</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="updateLanguage('mr')">मराठी</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="updateLanguage('gu')">ગુજરાતી</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="updateLanguage('pa')">ਪੰਜਾਬੀ</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-<!-- Output message box -->
-<div id="outputBox">
-    <p id="outputText"></p>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card feature-card" data-aos="fade-up">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4 translate" data-key="crop_predictor">Crop Predictor</h2>
+                    <form id="userForm">
+                        <div class="mb-3">
+                            <label for="nitrogen" class="form-label"><i class="fas fa-leaf"></i> <span class="translate" data-key="nitrogen">Nitrogen (N) Level:</span></label>
+                            <input type="number" class="form-control" id="nitrogen" name="nitrogen" placeholder="Enter Nitrogen level (in ppm)" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phosphorus" class="form-label"><i class="fas fa-atom"></i> <span class="translate" data-key="phosphorus">Phosphorus (P) Level:</span></label>
+                            <input type="number" class="form-control" id="phosphorus" name="phosphorus" placeholder="Enter Phosphorus level (in ppm)" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="potassium" class="form-label"><i class="fas fa-tint"></i> <span class="translate" data-key="potassium">Potassium (K) Level:</span></label>
+                            <input type="number" class="form-control" id="potassium" name="potassium" placeholder="Enter Potassium level (in ppm)" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="temperature" class="form-label"><i class="fas fa-thermometer-half"></i> <span class="translate" data-key="temperature">Temperature (°C):</span></label>
+                            <input type="number" class="form-control" id="temperature" name="temperature" placeholder="Enter Temperature (in °C)" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="humidity" class="form-label"><i class="fas fa-water"></i> <span class="translate" data-key="humidity">Humidity (%):</span></label>
+                            <input type="number" class="form-control" id="humidity" name="humidity" placeholder="Enter Humidity (in %)" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ph" class="form-label"><i class="fas fa-vial"></i> <span class="translate" data-key="ph">pH Level:</span></label>
+                            <input type="number" class="form-control" id="ph" name="ph" placeholder="Enter pH level" step="0.1" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="rainfall" class="form-label"><i class="fas fa-cloud-rain"></i> <span class="translate" data-key="rainfall">Rainfall (mm):</span></label>
+                            <input type="number" class="form-control" id="rainfall" name="rainfall" placeholder="Enter Rainfall (in mm)" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 animate__animated animate__pulse translate" data-key="predict_crop">Predict Crop</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="outputBox" class="mt-4 animate__animated animate__fadeIn">
+                <p id="outputText" class="mb-0"></p>
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="https://www.kaggle.com/code/deepakshandilyaa/kheti-mitra-aiml-model-final/notebook" target="_blank" class="btn btn-secondary animate__animated animate__bounceIn translate" data-key="view_research">View Research</a>
+            </div>
+        </div>
+    </div>
 </div>
 
-<!-- Button linking to research page -->
-<div class="research-button">
-    <a href="https://www.kaggle.com/code/deepakshandilyaa/kheti-mitra-aiml-model-final/notebook" target="_blank"><button>Research Page</button></a>
+<!-- Loading overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="loader"></div>
 </div>
 
+<!-- Footer -->
+<footer class="bg-light text-center text-lg-start mt-5">
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2023 <span class="translate" data-key="footer_text">Kheti Mitra - Empowering Farmers</span>
+        <a class="text-dark" href="#">khetimitra.com</a>
+    </div>
+</footer>
+
+<!-- MDB -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
+<!-- AOS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-document.getElementById("userForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent the default form submission
-    
-    var form = this;
-    var valuesArray = []; // Initialize an empty array to store values
-    
-    // Loop through each input field and push its numeric value to the valuesArray
-    for (var i = 1; i <= 7; i++) {
-        var fieldName = ['nitrogen', 'phosphorus', 'potassium', 'temperature', 'humidity', 'ph', 'rainfall'][i - 1];
-        var fieldValue = parseFloat(form.elements[fieldName].value);
-        valuesArray.push(fieldValue);
-    }
-    
-    // Make a POST request to the Flask server
-    fetch("https://kheti-mitra-only-server-peach.vercel.app/predict", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
+    AOS.init();
+
+    const translations = {
+        en: {
+            brand: "Kheti Mitra",
+            dashboard: "Dashboard",
+            crop_predictor: "Crop Predictor",
+            logout: "Logout",
+            nitrogen: "Nitrogen (N) Level:",
+            phosphorus: "Phosphorus (P) Level:",
+            potassium: "Potassium (K) Level:",
+            temperature: "Temperature (°C):",
+            humidity: "Humidity (%):",
+            ph: "pH Level:",
+            rainfall: "Rainfall (mm):",
+            predict_crop: "Predict Crop",
+            view_research: "View Research",
+            footer_text: "Kheti Mitra - Empowering Farmers"
         },
-        body: JSON.stringify({ "input": valuesArray })
-    })
-    .then(response => response.json()) // Parse the response as JSON
-    .then(data => {
-        // Handle the response data
-        console.log(data);
-        // Display the output in the styled message box
-        var outputBox = document.getElementById("outputBox");
-        var outputText = document.getElementById("outputText");
-        outputText.textContent = "You Should Grow : " + data.output;
-        outputBox.style.display = "block"; // Show the output box
-    })
-    .catch(error => {
-        console.error("Error:", error);
-        // Handle errors here
-        alert("An error occurred. Please try again.");
+        hi: {
+            brand: "खेती मित्र",
+            dashboard: "डैशबोर्ड",
+            crop_predictor: "फसल भविष्यवक्ता",
+            logout: "लॉग आउट",
+            nitrogen: "नाइट्रोजन (N) स्तर:",
+            phosphorus: "फास्फोरस (P) स्तर:",
+            potassium: "पोटैशियम (K) स्तर:",
+            temperature: "तापमान (°C):",
+            humidity: "आर्द्रता (%):",
+            ph: "पीएच स्तर:",
+            rainfall: "वर्षा (मिमी):",
+            predict_crop: "फसल की भविष्यवाणी करें",
+            view_research: "शोध देखें",
+            footer_text: "खेती मित्र - किसानों को सशक्त बनाना"
+        },
+        mr: {
+            brand: "खेती मित्र",
+            dashboard: "डॅशबोर्ड",
+            crop_predictor: "पीक भविष्यवक्ता",
+            logout: "लॉग आउट",
+            nitrogen: "नायट्रोजन (N) पातळी:",
+            phosphorus: "फॉस्फरस (P) पातळी:",
+            potassium: "पोटॅशियम (K) पातळी:",
+            temperature: "तापमान (°C):",
+            humidity: "आर्द्रता (%):",
+            ph: "पीएच पातळी:",
+            rainfall: "पाऊस (मिमी):",
+            predict_crop: "पीक भाकीत करा",
+            view_research: "संशोधन पहा",
+            footer_text: "खेती मित्र - शेतकऱ्यांना सक्षम करणे"
+        },
+        gu: {
+            brand: "ખેતી મિત્ર",
+            dashboard: "ડેશબોર્ડ",
+            crop_predictor: "પાક ભવિષ્યવક્તા",
+            logout: "લૉગ આઉટ",
+            nitrogen: "નાઇટ્રોજન (N) સ્તર:",
+            phosphorus: "ફોસ્ફરસ (P) સ્તર:",
+            potassium: "પોટેશિયમ (K) સ્તર:",
+            temperature: "તાપમાન (°C):",
+            humidity: "ભેજ (%):",
+            ph: "પીએચ સ્તર:",
+            rainfall: "વરસાદ (મિમી):",
+            predict_crop: "પાકની આગાહી કરો",
+            view_research: "સંશોધન જુઓ",
+            footer_text: "ખેતી મિત્ર - ખેડૂતોને સશક્ત બનાવવા"
+        },
+        pa: {
+            brand: "ਖੇਤੀ ਮਿੱਤਰ",
+            dashboard: "ਡੈਸ਼ਬੋਰਡ",
+            crop_predictor: "ਫਸਲ ਭਵਿੱਖਬਾਣੀ",
+            logout: "ਲੌਗ ਆਉਟ",
+            nitrogen: "ਨਾਈਟ੍ਰੋਜਨ (N) ਪੱਧਰ:",
+            phosphorus: "ਫਾਸਫੋਰਸ (P) ਪੱਧਰ:",
+            potassium: "ਪੋਟਾਸ਼ੀਅਮ (K) ਪੱਧਰ:",
+            temperature: "ਤਾਪਮਾਨ (°C):",
+            humidity: "ਨਮੀ (%):",
+            ph: "ਪੀਐਚ ਪੱਧਰ:",
+            rainfall: "ਮੀਂਹ (ਮਿਮੀ):",
+            predict_crop: "ਫਸਲ ਦੀ ਭਵਿੱਖਬਾਣੀ ਕਰੋ",
+            view_research: "ਖੋਜ ਵੇਖੋ",
+            footer_text: "ਖੇਤੀ ਮਿੱਤਰ - ਕਿਸਾਨਾਂ ਨੂੰ ਸ਼ਕਤੀਸ਼ਾਲੀ ਬਣਾਉਣਾ"
+        }
+    };
+
+    function updateLanguage(lang) {
+        document.querySelectorAll('.translate').forEach(element => {
+            element.classList.add('fade-out');
+            setTimeout(() => {
+                const key = element.getAttribute('data-key');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+                element.classList.remove('fade-out');
+                element.classList.add('fade-in');
+                setTimeout(() => {
+                    element.classList.remove('fade-in');
+                }, 300);
+            }, 300);
+        });
+    }
+
+    document.getElementById("userForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        var form = this;
+        var valuesArray = [];
+        
+        ['nitrogen', 'phosphorus', 'potassium', 'temperature', 'humidity', 'ph', 'rainfall'].forEach(fieldName => {
+            var fieldValue = parseFloat(form.elements[fieldName].value);
+            valuesArray.push(fieldValue);
+        });
+        
+        // Show loading overlay
+        document.getElementById("loadingOverlay").style.display = "flex";
+        
+        // Simulate a minimum loading time of 4 seconds
+        setTimeout(() => {
+            fetch("https://kheti-mitra-only-server-peach.vercel.app/predict", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ "input": valuesArray })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                var outputBox = document.getElementById("outputBox");
+                var outputText = document.getElementById("outputText");
+                outputText.textContent = "You Should Grow: " + data.output;
+                outputBox.style.display = "block";
+                outputBox.classList.add('animate__animated', 'animate__fadeIn');
+                
+                // Hide loading overlay
+                document.getElementById("loadingOverlay").style.display = "none";
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred. Please try again.");
+                
+                // Hide loading overlay
+                document.getElementById("loadingOverlay").style.display = "none";
+            });
+        }, 4000); // 4 seconds minimum loading time
     });
-});
 </script>
 
 </body>

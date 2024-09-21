@@ -2,259 +2,258 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>Kheti Mitra</title>
-    <link rel="stylesheet" href="css/header.css" />
-    <!-- MDB icon -->
-    <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
     <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
-    />
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <!-- Material Design Bootstrap -->
-    <link rel="stylesheet" href="css/mdb.min.css" />
-    <!-- Your custom styles (optional) -->
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.css" rel="stylesheet" />
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Lottie Player -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <style>
+      :root {
+        --primary-color: #4CAF50;
+        --secondary-color: #45a049;
+        --text-color: #333;
+        --bg-color: #f1f8e9;
+      }
+      body {
+        font-family: 'Roboto', sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+      }
+      .navbar {
+        background-color: var(--primary-color);
+      }
+      .btn-primary {
+        background-color: var(--primary-color);
+      }
+      .btn-primary:hover {
+        background-color: var(--secondary-color);
+      }
+      .feature-card {
+        transition: transform 0.3s ease-in-out;
+      }
+      .feature-card:hover {
+        transform: translateY(-10px);
+      }
+      .language-btn {
+        transition: all 0.3s ease;
+      }
+      .language-btn:hover {
+        transform: scale(1.1);
+      }
+      .plant-animation {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.9);
+        z-index: 9999;
+        display: none;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
   </head>
   <body>
-    <!-- Start your project here-->
-    <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-dark primary-color" id="header">
-      <!-- Navbar brand -->
-      <a class="navbar-brand ml-sm-auto font-weight-bold" href="#">Kheti Mitra</a>
-
-      <!-- Collapse button -->
-      <button
-        class="navbar-toggler mr-sm-auto"
-        type="button"
-        data-toggle="collapse"
-        data-target="#basicExampleNav"
-        aria-controls="basicExampleNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <!-- Collapsible content -->
-      <div class="collapse navbar-collapse" id="basicExampleNav">
-        <!-- Links -->
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#"
-              >Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-          </li>
-
-          <!-- Dropdown -->
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              id="navbarDropdownMenuLink"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-              >Dropdown</a
-            >
-            <div
-              class="dropdown-menu dropdown-primary"
-              aria-labelledby="navbarDropdownMenuLink"
-            >
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-        </ul>
-        <!-- Links -->
-
-        <form class="form-inline">
-          <div class="md-form my-0">
-            <input
-              class="form-control mr-sm-2"
-              type="text"
-              placeholder="Search"
-              aria-label="Search"
-            />
-          </div>
-        </form>
+    <div class="plant-animation" id="plantAnimation">
+      <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_jbrw3hcz.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+    </div>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Kheti Mitra</a>
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#" data-lang-key="home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-lang-key="features">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-lang-key="about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-lang-key="contact">Contact</a>
+            </li>
+          </ul>
+        </div>
       </div>
-      <!-- Collapsible content -->
     </nav>
-    <!--/.Navbar-->
-    <div class="container-fluid">
+
+    <!-- Main Content -->
+    <div class="container my-5">
       <div class="row">
-        <div class="col-12 p-0 col-md-8">
-          <!--Carousel Wrapper-->
-          <div
-            id="carousel-example-2"
-            class="carousel slide carousel-fade mt-md-5 ml-md-5"
-            data-ride="carousel"
-          >
-            <!--Indicators-->
-            <ol class="carousel-indicators">
-              <li
-                data-target="#carousel-example-2"
-                data-slide-to="0"
-                class="active"
-              ></li>
-              <li data-target="#carousel-example-2" data-slide-to="1"></li>
-              <li data-target="#carousel-example-2" data-slide-to="2"></li>
-            </ol>
-            <!--/.Indicators-->
-            <!--Slides-->
-            <div class="carousel-inner" role="listbox">
-              <div class="carousel-item active">
-                <div class="view">
-                  <img class="d-block w-100" src="img/logo.jpg" alt="First slide" />
-                  <div class="mask rgba-black-light"></div>
-                </div>
-                <div class="carousel-caption">
-                  <h3 class="h3-responsive">Kheti Mitra</h3>
-                  
-                </div>
-              </div>
-              <div class="carousel-item">
-                <!--Mask color-->
-                <div class="view">
-                  <img class="d-block w-100" src="img/tem.jpg" alt="Second slide" />
-                  <div class="mask rgba-black-light"></div>
-                </div>
-                <div class="carousel-caption">
-                  <h3 class="h3-responsive">Kheti Mitra</h3>
-                  <!-- <p>this is demo text</p> -->
-                </div>
-              </div>
-              <div class="carousel-item">
-                <!--Mask color-->
-                <div class="view">
-                  <img class="d-block w-100" src="img/tem.jpg" alt="Third slide" />
-                  <div class="mask rgba-black-light"></div>
-                </div>
-                <div class="carousel-caption">
-                  <h3 class="h3-responsive">Kheti Mitra</h3>
-                  <!-- <p>this is demo text</p> -->
-                </div>
-              </div>
-            </div>
-            <!--/.Slides-->
-            <!--Controls-->
-            <a
-              class="carousel-control-prev"
-              href="#carousel-example-2"
-              role="button"
-              data-slide="prev"
-            >
-              <span
-                class="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a
-              class="carousel-control-next"
-              href="#carousel-example-2"
-              role="button"
-              data-slide="next"
-            >
-              <span
-                class="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="sr-only">Next</span>
-            </a>
-            <!--/.Controls-->
-          </div>
-          <!--/.Carousel Wrapper-->
+        <div class="col-lg-6" data-aos="fade-right">
+          <h1 class="display-4 mb-4" data-lang-key="welcome">Welcome to Kheti Mitra</h1>
+          <p class="lead mb-4" data-lang-key="empowering">Empowering farmers with AI-driven insights and real-time data for sustainable agriculture.</p>
+          <a href="dashboard.html" class="btn btn-primary btn-lg me-2" data-lang-key="login" onclick="animateTransition(event)">Login</a>
+          <a href="#" class="btn btn-outline-primary btn-lg" data-lang-key="register">Register</a>
         </div>
-        <div class="col-12 p-0 col-md-4">
-          <!-- Card -->
-          <div class="card mt-md-5 ml-md-3" style="box-shadow: none;">
-            <!-- Card content -->
+        <div class="col-lg-6" data-aos="fade-left">
+          <!-- <img src="img/farmer.jpg" alt="Farmer in field" class="img-fluid rounded-3 shadow"> -->
+        </div>
+      </div>
+
+      <div class="row mt-5">
+        <h2 class="text-center mb-4" data-lang-key="our-features">Our Features</h2>
+        <div class="col-md-4 mb-4" data-aos="zoom-in">
+          <div class="card feature-card h-100">
             <div class="card-body">
-              <!-- Title -->
-              <h1 class="card-title text-center"><a>Kheti Mitra</a></h1>
-              <!-- Text -->
-              <p class="card-text" style="height: 17vh; color: rgb(55, 178, 27);">
-                <font size="+2">"KhetiMitra" is a comprehensive solution that integrates real-time data, AI-driven insights, 
-                and user-friendly platforms to empower farmers. It effectively addresses challenges posed by 
-                shifting weather patterns, limited seed knowledge, and low tech adoption,
-                fostering sustainability and resilience in agriculture.</font>
-              </p>
-              
-              </p>
-              <h2 class="card-title text-center"><a>Features </a></h2>
-              <ul class="card-text" style="height: 22vh; list-style-type: disc; color: black; font-weight: bold;">
-                <li style="font-size: 20px;">➢Weather & Soil Insights</li>
-                <li style="font-size: 20px;">➢AI Crop Recommendations</li>
-                <li style="font-size: 20px;">➢Market Price Predictions</li>
-                <li style="font-size: 20px;">➢Pest & Disease Alerts</li>
-                <li style="font-size: 20px;">➢Tech Adoption Guidance</li>
-                <li style="font-size: 20px;">➢AI-Powered Crop Calendar</li>
-                <li style="font-size: 20px;">➢Crop-specific SOPs for Maximum Yield</li>
-              </ul>
-              
-              
-              
-              
-              </p>
-              <!-- <p class="d-none d-md-block" style="height: 15vh;">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-                nesciunt repudiandae nulla voluptates consequuntur aut
-                reiciendis ducimus suscipit? Cumque, ratione.
-              </p> -->
-              <!-- Button -->
-              <div class="d-md-flex flex-center mt-3 mb-3 mb-md-4">
-                <a href="#" class="text-primary mr-3 lang">English</a>
-                <a href="#" class="text-primary mr-3">हिंदी</a>
-                <a href="#" class="text-primary mr-3">ਪੰਜਾਬੀ</a>
-                <a href="#" class="text-primary mr-2">বাঙ্গালী</a>
-              </div>
-              <a
-                href="dashboard.html"
-                class="btn homeButton d-md-flex flex-center flex-column mb-md-4"
-                ><h5><i class="fas fa-sign-in-alt"></i></h5>
-                <h6>Login</h6>
-                </a
-              >
-              <a
-                href="#"
-                class="btn homeButton d-md-flex flex-center flex-column"
-                ><h5><i class="far fa-file-alt"></i></h5>
-                <h6>Register</h6></a
-              >
+              <i class="fas fa-cloud-sun fa-3x mb-3 text-primary"></i>
+              <h5 class="card-title" data-lang-key="weather-soil">Weather & Soil Insights</h5>
+              <p class="card-text" data-lang-key="weather-soil-desc">Get real-time weather updates and soil analysis for informed decision-making.</p>
             </div>
           </div>
-          <!-- Card -->
         </div>
+        <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card feature-card h-100">
+            <div class="card-body">
+              <i class="fas fa-robot fa-3x mb-3 text-primary"></i>
+              <h5 class="card-title" data-lang-key="ai-crop">AI Crop Recommendations</h5>
+              <p class="card-text" data-lang-key="ai-crop-desc">Receive personalized crop recommendations based on AI analysis.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="200">
+          <div class="card feature-card h-100">
+            <div class="card-body">
+              <i class="fas fa-chart-line fa-3x mb-3 text-primary"></i>
+              <h5 class="card-title" data-lang-key="market-price">Market Price Predictions</h5>
+              <p class="card-text" data-lang-key="market-price-desc">Stay ahead with accurate market price predictions for your crops.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-5">
+        <h3 class="mb-4" data-lang-key="choose-language">Choose Your Language</h3>
+        <button onclick="changeLanguage('en')" class="btn btn-outline-primary language-btn me-2 mb-2">English</button>
+        <button onclick="changeLanguage('hi')" class="btn btn-outline-primary language-btn me-2 mb-2">हिंदी</button>
+        <button onclick="changeLanguage('pa')" class="btn btn-outline-primary language-btn me-2 mb-2">ਪੰਜਾਬੀ</button>
+        <button onclick="changeLanguage('bn')" class="btn btn-outline-primary language-btn mb-2">বাঙ্গালী</button>
       </div>
     </div>
 
-    <!-- End your project here-->
+    <!-- Footer -->
+    <footer class="bg-light text-center text-lg-start mt-5">
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2023 Kheti Mitra:
+        <a class="text-dark" href="#">khetimitra.com</a>
+      </div>
+    </footer>
 
-    <!-- jQuery -->
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="js/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="js/mdb.min.js"></script>
-    <!-- Your custom scripts (optional) -->
-    <script type="text/javascript"></script>
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
+    <!-- AOS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+
+      const translations = {
+        en: {
+          "home": "Home",
+          "features": "Features",
+          "about": "About",
+          "contact": "Contact",
+          "welcome": "Welcome to Kheti Mitra",
+          "empowering": "Empowering farmers with AI-driven insights and real-time data for sustainable agriculture.",
+          "login": "Login",
+          "register": "Register",
+          "our-features": "Our Features",
+          "weather-soil": "Weather & Soil Insights",
+          "weather-soil-desc": "Get real-time weather updates and soil analysis for informed decision-making.",
+          "ai-crop": "AI Crop Recommendations",
+          "ai-crop-desc": "Receive personalized crop recommendations based on AI analysis.",
+          "market-price": "Market Price Predictions",
+          "market-price-desc": "Stay ahead with accurate market price predictions for your crops.",
+          "choose-language": "Choose Your Language"
+        },
+        hi: {
+          "home": "होम",
+          "features": "सुविधाएँ",
+          "about": "हमारे बारे में",
+          "contact": "संपर्क करें",
+          "welcome": "खेती मित्र में आपका स्वागत है",
+          "empowering": "टिकाऊ कृषि के लिए AI-संचालित अंतर्दृष्टि और वास्तविक समय के डेटा के साथ किसानों को सशक्त बनाना।",
+          "login": "लॉग इन करें",
+          "register": "पंजीकरण करें",
+          "our-features": "हमारी सुविधाएँ",
+          "weather-soil": "मौसम और मिट्टी की जानकारी",
+          "weather-soil-desc": "सूचित निर्णय लेने के लिए वास्तविक समय के मौसम अपडेट और मिट्टी विश्लेषण प्राप्त करें।",
+          "ai-crop": "AI फसल सिफारिशें",
+          "ai-crop-desc": "AI विश्लेषण के आधार पर व्यक्तिगत फसल सिफारिशें प्राप्त करें।",
+          "market-price": "बाजार मूल्य भविष्यवाणियाँ",
+          "market-price-desc": "अपनी फसलों के लिए सटीक बाजार मूल्य भविष्यवाणियों के साथ आगे रहें।",
+          "choose-language": "अपनी भाषा चुनें"
+        },
+        pa: {
+          "home": "ਹੋਮ",
+          "features": "ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ",
+          "about": "ਬਾਰੇ",
+          "contact": "ਸੰਪਰਕ ਕਰੋ",
+          "welcome": "ਖੇਤੀ ਮਿੱਤਰ ਵਿੱਚ ਤੁਹਾਡਾ ਸਵਾਗਤ ਹੈ",
+          "empowering": "ਟਿਕਾਊ ਖੇਤੀਬਾੜੀ ਲਈ AI-ਸੰਚਾਲਿਤ ਅੰਤਰਦ੍ਰਿਸ਼ਟੀ ਅਤੇ ਰੀਅਲ-ਟਾਈਮ ਡੇਟਾ ਨਾਲ ਕਿਸਾਨਾਂ ਨੂੰ ਸ਼ਕਤੀਸ਼ਾਲੀ ਬਣਾਉਣਾ।",
+          "login": "ਲਾਗਇਨ",
+          "register": "ਰਜਿਸਟਰ ਕਰੋ",
+          "our-features": "ਸਾਡੀਆਂ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ",
+          "weather-soil": "ਮੌਸਮ ਅਤੇ ਮਿੱਟੀ ਦੀ ਜਾਣਕਾਰੀ",
+          "weather-soil-desc": "ਸੂਚਿਤ ਫੈਸਲੇ ਲੈਣ ਲਈ ਰੀਅਲ-ਟਾਈਮ ਮੌਸਮ ਅੱਪਡੇਟ ਅਤੇ ਮਿੱਟੀ ਵਿਸ਼ਲੇਸ਼ਣ ਪ੍ਰਾਪਤ ਕਰੋ।",
+          "ai-crop": "AI ਫਸਲ ਸਿਫਾਰਸ਼ਾਂ",
+          "ai-crop-desc": "AI ਵਿਸ਼ਲੇਸ਼ਣ ਦੇ ਆਧਾਰ 'ਤੇ ਵਿਅਕਤੀਗਤ ਫਸਲ ਸਿਫਾਰਸ਼ਾਂ ਪ੍ਰਾਪਤ ਕਰੋ।",
+          "market-price": "ਬਾਜ਼ਾਰ ਮੁੱਲ ਭਵਿੱਖਬਾਣੀਆਂ",
+          "market-price-desc": "ਆਪਣੀਆਂ ਫਸਲਾਂ ਲਈ ਸਹੀ ਬਾਜ਼ਾਰ ਮੁੱਲ ਭਵਿੱਖਬਾਣੀਆਂ ਨਾਲ ਅੱਗੇ ਰਹੋ।",
+          "choose-language": "ਆਪਣੀ ਭਾਸ਼ਾ ਚੁਣੋ"
+        },
+        bn: {
+          "home": "হোম",
+          "features": "বৈশিষ্ট্য",
+          "about": "সম্পর্কে",
+          "contact": "যোগাযোগ",
+          "welcome": "খেতি মিত্রে আপনাকে স্বাগতম",
+          "empowering": "টেকসই কৃষির জন্য AI-চালিত অন্তর্দৃষ্টি এবং রিয়েল-টাইম ডেটা দিয়ে কৃষকদের ক্ষমতায়ন।",
+          "login": "লগইন",
+          "register": "নিবন্ধন",
+          "our-features": "আমাদের বৈশিষ্ট্য",
+          "weather-soil": "আবহাওয়া ও মাটির অন্তর্দৃষ্টি",
+          "weather-soil-desc": "অবহিত সিদ্ধান্ত নেওয়ার জন্য রিয়েল-টাইম আবহাওয়া আপডেট এবং মাটি বিশ্লেষণ পান।",
+          "ai-crop": "AI ফসল সুপারিশ",
+          "ai-crop-desc": "AI বিশ্লেষণের উপর ভিত্তি করে ব্যক্তিগতকৃত ফসল সুপারিশ পান।",
+          "market-price": "বাজার মূল্য পূর্বাভাস",
+          "market-price-desc": "আপনার ফসলের জন্য সঠিক বাজার মূল্য পূর্বাভাসের সাথে এগিয়ে থাকুন।",
+          "choose-language": "আপনার ভাষা চয়ন করুন"
+        }
+      };
+
+      function changeLanguage(lang) {
+        document.querySelectorAll('[data-lang-key]').forEach(element => {
+          const key = element.getAttribute('data-lang-key');
+          if (translations[lang] && translations[lang][key]) {
+            element.textContent = translations[lang][key];
+          }
+        });
+        document.documentElement.lang = lang;
+      }
+
+      function animateTransition(event) {
+        event.preventDefault();
+        const plantAnimation = document.getElementById('plantAnimation');
+        plantAnimation.style.display = 'flex';
+        setTimeout(() => {
+          window.location.href = event.target.href;
+        }, 3000);
+      }
+    </script>
   </body>
 </html>
