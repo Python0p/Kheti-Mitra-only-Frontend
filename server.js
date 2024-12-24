@@ -35,7 +35,7 @@ const User = mongoose.model('User', userSchema);
 
 // Generate JWT token function
 const generateToken = (userId) => {
-  return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '24h' });
+  return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '1h' });
 };
 
 // Middleware to verify JWT token
