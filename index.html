@@ -1,22 +1,31 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    fetch('https://kheti-mitra-auth.vercel.app/validate-token', {
-      method: 'POST',
-      credentials: 'include', // Include cookies in the request
-    })
-      .then(response => {
-        if (!response.ok) {
-          // Redirect to login page if token is invalid
-          window.location.href = '/login.html';
-        }
+    // Example of waiting for a user action, like clicking a button
+    const validateButton = document.getElementById('validateButton');
+    
+    validateButton.addEventListener('click', () => {
+      fetch('https://kheti-mitra-auth.vercel.app/validate-token', {
+        method: 'POST',
+        credentials: 'include', // Include cookies in the request
       })
-      .catch(error => {
-        console.error('Error validating token:', error);
-        // Redirect to login page on error
-        window.location.href = '/login.html';
-      });
+        .then(response => {
+          if (!response.ok) {
+            // Redirect to login page if token is invalid
+            window.location.href = '/login.html';
+          }
+        })
+        .catch(error => {
+          console.error('Error validating token:', error);
+          // Redirect to login page on error
+          window.location.href = '/login.html';
+        });
+    });
   });
 </script>
+
+<!-- Add a button in your HTML to trigger the validation -->
+<button id="validateButton">Validate Token</button>
+
 
 
 <!DOCTYPE html>
